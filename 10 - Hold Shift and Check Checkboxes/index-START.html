@@ -75,7 +75,7 @@
     </div>
     <div class="item">
       <input type="checkbox">
-      <p>Everything inbetween should also be set to checked</p>
+      <p>Everything in between should also be set to checked</p>
     </div>
     <div class="item">
       <input type="checkbox">
@@ -95,7 +95,28 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+  const checkboxes = document.querySelectorAll('input');
+  let lastChecked;
+
+  function handleChecks(e) {
+    if (e.shiftKey && this.checked) {
+      let inBetween = false;
+      checkboxes.forEach(checkbox => {
+        if (checkbox === lastChecked || checkbox === this) {
+          inBetween = !inBetween;
+        } 
+        
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      })
+    } else {
+      lastChecked = this;
+    }
+  }
+
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleChecks));
+  </script>
 </body>
 </html>
