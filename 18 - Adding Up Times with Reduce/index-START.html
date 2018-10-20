@@ -182,6 +182,19 @@
     </li>
   </ul>
 <script>
+
+const timeNodes = document.querySelectorAll('[data-time]');
+const times = [...timeNodes].map(el => el.getAttribute('data-time'));
+const seconds = times.map(time => {
+  const [min, sec] = time.split(':');
+  return +min * 60 + +sec;
+});
+const totalSeconds = seconds.reduce((total, current) => total + current);
+const totalHours = Math.floor(totalSeconds / 3600);
+const totalMinutes = Math.floor(totalSeconds / 60) % 60;
+const remainingSeconds = totalSeconds % 60;
+console.log(`Total Time: ${totalHours}:${totalMinutes}:${remainingSeconds}`);
+
 </script>
 </body>
 </html>
